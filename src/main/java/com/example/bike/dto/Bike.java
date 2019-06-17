@@ -1,17 +1,20 @@
 package com.example.bike.dto;
 
+import org.springframework.data.annotation.Id;
+
 public class Bike {
-    private Integer id;
+
+    private String id;
     private String status;
     private String latitude; //纬度
     private String longitude; //经度
     private String qrCode; //车辆身份码
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
