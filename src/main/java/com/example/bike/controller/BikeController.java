@@ -3,7 +3,6 @@ package com.example.bike.controller;
 import com.example.bike.dto.Bike;
 import com.example.bike.service.BikeServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,8 +29,9 @@ public class BikeController {
         return "success";
     }
 
-    @GetMapping("/all")
+    @GetMapping("/list")
     public List<Bike> getAllBike() {
         return service.getAllBike();
     }
+
 }
