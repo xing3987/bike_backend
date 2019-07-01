@@ -14,10 +14,11 @@ public class LogController {
     @Autowired
     private LogServiceImp service;
 
-    @PostMapping("ready")
+    @PostMapping("/ready")
     public String checkBike(@RequestBody String readyLog) {
         System.out.println(readyLog);
         service.save(readyLog);
         return "success";
     }
+
 }
