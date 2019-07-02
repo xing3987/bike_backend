@@ -1,7 +1,8 @@
 package com.example.bike.dto;
 
-import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "bike")
 public class Bike {
 
     private String id;

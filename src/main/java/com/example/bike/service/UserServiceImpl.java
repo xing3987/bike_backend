@@ -2,7 +2,8 @@ package com.example.bike.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.bike.dto.User;
-import com.qcloud.sms.SmsSingleSender;
+import com.github.qcloudsms.SmsSingleSender;
+import com.github.qcloudsms.SmsSingleSenderResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -50,19 +51,27 @@ public class UserServiceImpl implements UserService {
         return flag;
     }
 
+    /**
+     * 调用腾讯云api获取短信验证码发送并保存到redis中
+     *
+     * @param nationCode
+     * @param phoneNum
+     * @throws Exception
+     */
     @Override
     public void genVerifyCode(String nationCode, String phoneNum) throws Exception {
         String appkey = stringRedisTemplate.opsForValue().get("appkey");
         //redisTemplate.
         //调用腾讯云的短信接口（短信的appid， 短信的appkey）
-        SmsSingleSender singleSender = new SmsSingleSender(1400047183, appkey);
+        SmsSingleSender singleSender = new SmsSingleSender(1400228097, appkey);
         //普通单发
         //String code = "8888";
         String code = (int) ((Math.random() * 9 + 1) * 1000) + "";
         //调用发送短信功能
-        singleSender.send(0, nationCode, phoneNum, "您的登录验证码为" + code, "", "");
+        SmsSingleSenderResult result = singleSender.send(0, nationCode, phoneNum, "您的登录验证码为" + code, "", "");
+        System.out.println(result);
         //将数据保存到redis中，redis的key手机号，value是验证码，有效时长120秒
-        stringRedisTemplate.opsForValue().set(phoneNum, code, 120, TimeUnit.SECONDS);
+        stringRedisTemplate.opsForValue().set(phoneNum, code, 5*60, TimeUnit.SECONDS);
     }
 
     @Override

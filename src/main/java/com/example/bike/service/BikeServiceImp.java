@@ -16,8 +16,6 @@ public class BikeServiceImp implements BikeService {
     private BikeMapper mapper;
     @Autowired
     private MongoTemplate mongoTemplate; //mongo的模版
-    @Value("${spring.data.mongodb.collection.bike}")
-    private String collection;
 
     @Override
     public void save(Bike bike) {
@@ -25,10 +23,10 @@ public class BikeServiceImp implements BikeService {
     }
 
     public void save(String bike) {
-        mongoTemplate.save(bike, collection);
+        mongoTemplate.save(bike);
     }
 
     public List<Bike> getAllBike() {
-        return mongoTemplate.findAll(Bike.class, collection);
+        return mongoTemplate.findAll(Bike.class);
     }
 }
