@@ -31,5 +31,5 @@ public interface UserService {
 
 	void identify(User user);
 
-	boolean recharge(String params);
+	User recharge(String params);
 }

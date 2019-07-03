@@ -42,11 +42,52 @@ public class UserController {
         return msg;
     }
 
+    /**
+     * 校验手机验证码并保存用户
+     * @param user
+     * @return
+     */
     @PostMapping("/verify")
     @ResponseBody
     public boolean verify(User user) {
         boolean flag = userService.verify(user);
         return flag;
+    }
+
+    /**
+     * 保存充值初始额信息
+     * @param user
+     * @return
+     */
+    @PostMapping("/deposit")
+    @ResponseBody
+    public String deposit(User user) {
+        userService.deposit(user);
+        return "success";
+    }
+
+    /**
+     * 录入身份信息
+     * @param user
+     * @return
+     */
+    @PostMapping("/identify")
+    @ResponseBody
+    public String identify(User user) {
+        userService.identify(user);
+        return "success";
+    }
+
+    /**
+     * 支付，增加余额
+     * @return
+     */
+    @PostMapping("/recharge")
+    @ResponseBody
+    public Double recharge(@RequestBody String params) {
+        System.out.println(params);
+        User user = userService.recharge(params);
+        return user.getBalance();
     }
 
     /*@PostMapping("/reg")
