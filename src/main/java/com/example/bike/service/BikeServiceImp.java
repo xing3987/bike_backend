@@ -23,7 +23,7 @@ public class BikeServiceImp implements BikeService {
     }
 
     public void save(String bike) {
-        mongoTemplate.save(bike);
+        mongoTemplate.save(bike,"bike");
     }
 
     public List<Bike> getAllBike() {
